@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConsentGuard Pro - Compliance Pricing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>ConsentGuard Pro - Full Compliance Toolkit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* CSS Reset and Global Styles */
+        /* --- [ROOT] MODERN UI/UX STYLES --- */
         :root {
-            --primary-color: #007bff; /* Blue for brand identity */
-            --accent-color: #28a745; /* Green for "Best Value" or success */
-            --text-color: #495057;
-            --background-color: #f8f9fa;
-            --card-background: #ffffff;
-            --border-color: #e9ecef;
+            --primary-color: #4A46FF; /* Vibrant, modern tech blue/purple */
+            --accent-color: #00C49A;  /* Bright, high-converting teal/green */
+            --dark-color: #1E293B;    /* Softer, professional navy for text */
+            --text-color: #475569;    /* Readable grey-blue for body copy */
+            --bg-light: #F8FAFC;      /* Clean, light grey-blue background */
+            --bg-white: #FFFFFF;      /* Card background */
+            --border-color: #E2E8F0;  /* Soft border color */
         }
 
         * {
@@ -22,19 +25,995 @@
             padding: 0;
         }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            padding: 20px;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* Header/Hero Section */
-        .header {
-            text-align: center;
-            padding: 60px 20px 40px;
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        /* --- [SECTION] GLOBAL STYLING --- */
+        section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .section-header {
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .section-header .tagline {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        /* --- [NAVIGATION] STICKY NAV --- */
+        .navbar {
+            background: var(--bg-white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .navbar-links a {
+            color: var(--text-color);
+            margin-left: 30px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar .nav-cta {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar .nav-cta:hover {
+            background: #3a36db;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- [HERO] MAIN HEADER --- */
+        .hero {
+            background-color: var(--bg-light);
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .hero h1 {
+            color: var(--dark-color);
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        
+        .hero h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero .cta-button {
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 196, 154, 0.3);
+        }
+        
+        .hero .cta-button:hover {
+            background: #00a986;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 196, 154, 0.4);
+        }
+
+        /* --- [PRICING] CARDS --- */
+        .pricing-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+            padding: 35px;
+            width: 100%;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card.highlight {
+            border: 2px solid var(--primary-color);
+        }
+        
+        .highlight-ribbon {
+            position: absolute;
+            top: 0;
+            right: -35px;
+            background: var(--primary-color);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 30px;
+            transform: rotate(45deg);
+            box-shadow: 0 4px 10px rgba(74, 70, 255, 0.4);
+        }
+        
+        .pricing-card .card-header h2 {
+            color: var(--dark-color);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .pricing-card .card-header .tag {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin: 20px 0 5px;
+            line-height: 1;
+        }
+
+        .price-note {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+        
+        .card-description {
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            min-height: 50px; 
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+            flex-grow: 1;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            color: var(--text-color);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list li i {
+            color: var(--accent-color);
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .features-list li.key-feature {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: auto;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background-color: #3a36db;
+            transform: scale(1.02);
+        }
+        
+        .highlight .cta-button {
+            background-color: var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0, 196, 154, 0.3);
+        }
+        
+        .highlight .cta-button:hover {
+            background-color: #00a986;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0, 196, 154, 0.4);
+        }
+        
+        .cta-button.secondary {
+            background: none;
+            border: 2px solid var(--border-color);
+            color: var(--dark-color);
+        }
+        
+        .cta-button.secondary:hover {
+            background: var(--bg-light);
+            border-color: var(--bg-light);
+            color: var(--primary-color);
+        }
+
+        /* --- [HOW IT WORKS] --- */
+        #how-it-works {
+            background-color: var(--bg-white);
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            max-width: 1000px;
+            margin: 40px auto 0;
+            text-align: left;
+        }
+
+        .step-path {
+            flex: 1;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--bg-light);
+        }
+
+        .step-path h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .step-path ol {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .step-path ol li {
+            padding: 10px 0;
+            position: relative;
+            padding-left: 25px;
+            font-weight: 500;
+        }
+        
+        .step-path ol li::before {
+            content: '\f058'; /* Font Awesome check-circle */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            top: 12px;
+        }
+        
+        .step-path strong {
+            color: var(--dark-color);
+        }
+
+        /* --- [TESTIMONIALS] SOCIAL PROOF --- */
+        #testimonials {
+            background-color: var(--bg-white);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+        
+        .testimonial-card .stars {
+            color: #FFC107; /* Yellow for stars */
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card p.quote {
+            font-size: 1.1rem;
+            color: var(--dark-color);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-card .author {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .testimonial-card .title {
+            font-size: 0.9rem;
+        }
+
+        /* --- [FAQ] ACCORDION --- */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .faq-item {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '\f078'; /* Chevron Down */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding: 0 25px;
+        }
+        
+        .faq-answer p {
+            padding-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px; /* Adjust as needed */
+        }
+        
+        /* --- [FOOTER] --- */
+        .footer {
+            background-color: var(--dark-color);
+            color: #adb5bd;
+            padding: 60px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            text-align: left;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h4 {
+            color: var(--bg-white);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column ul li a, .footer .contact-info a {
+            color: #adb5bd;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover, .footer .contact-info a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer .contact-info p {
+            margin-bottom: 8px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #495057;
+            padding-top: 30px;
+            margin-top: 20px;
+        }
+        
+        /* --- [MODAL FORM] HIGH-CONVERTING POPUP --- */
+        .modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 41, 59, 0.7); /* Dark overlay */
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: var(--bg-white);
+            padding: 35px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.3s ease 0.1s;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #94a3b8;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .modal-close:hover {
+            color: var(--dark-color);
+        }
+        
+        .modal-content h3 {
+            color: var(--dark-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        
+        .modal-content p {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .modal-cta {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: var(--accent-color);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .modal-cta:hover {
+            background: #00a986;
+        }
+
+
+        /* --- [RESPONSIVE] STYLES --- */
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            .navbar-links {
+                display: none; /* Simple toggle for mobile */
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .pricing-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .pricing-card {
+                max-width: 500px;
+            }
+            .steps-container {
+                flex-direction: column;
+            }
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            section {
+                padding: 60px 15px;
+            }
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            .hero {
+                padding: 60px 20px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">ConsentGuard Pro</div>
+        <div class="navbar-links">
+            <a href="#pricing">Pricing</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#testimonials">Reviews</a>
+            <a href="#faq">FAQ</a>
+            <a href="javascript:void(0)" class="nav-cta open-modal-btn" data-package="General Inquiry">Get Started</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Your Store is Leaking Data. <span>We Fix It.</span></h1>
+        <p>Stop violating privacy laws, fix critical visibility errors, and turn your store into a trustworthy, high-performing business.</p>
+        <a href="javascript:void(0)" class="cta-button open-modal-btn" data-package="General Inquiry">
+            Get Your Free Compliance Audit <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+        </a>
+    </header>
+
+    <section id="pricing">
+        <div class="section-header">
+            <span class="tagline">Pricing Plans</span>
+            <h2>Choose Your Compliance Foundation</h2>
+            <p>One-time fees for permanent solutions. No subscriptions, no hidden costs. Just complete peace of mind.</p>
+        </div>
+        
+        <div class="pricing-container">
+
+            <div class="pricing-card">
+                <div class="card-header">
+                    <h2>Essential Compliance Toolkit</h2>
+                    <span class="tag">Automated Path</span>
+                </div>
+                <div class="price">$199</div>
+                <div class="price-note">One-Time Fee</div>
+                <p class="card-description">The essential, automated solution to immediately stop illegal customer tracking and avoid compliance fines.</p>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i>Dedicated Security Layer</li>
+                    <li><i class="fas fa-check-circle"></i>Legal Consent Gate</li>
+                    <li><i class="fas fa-check-circle"></i>Automated XML Sitemap Fix</li>
+                    <li><i class="fas fa-check-circle"></i>HTML Tag Correction</li>
+                    <li><i class="fas fa-check-circle"></i>Compliance Verification Scan</li>
+                    <li><i class="fas fa-check-circle"></i>7-Day Post-Issuance Support</li>
+                    <li class="key-feature"><i class="fas fa-star"></i>Results: Legal Compliance (No Fines)</li>
+                </ul>
+
+                <a href="javascript:void(0)" class="cta-button secondary open-modal-btn" data-package="Essential Compliance Toolkit ($199)">Get Started</a>
+            </div>
+
+            <div class="pricing-card highlight">
+                <div class="highlight-ribbon">Best Value</div>
+                <div class="card-header">
+                    <h2>Advanced Compliance & SEO Suite</h2>
+                    <span class="tag" style="color: var(--accent-color);">Recommended Value</span>
+                </div>
+                <div class="price">$449</div>
+                <div class="price-note">One-Time Fee</div>
+                <p class="card-description">Deeper optimization and a manual review to create a robust, user-friendly, and technically sound store foundation.</p>
+
+                <ul class="features-list">
+                    <li class="key-feature"><i class="fas fa-check-double"></i>All Features in Essential, plus:</li>
+                    <li><i class="fas fa-check-circle"></i>Customizable Consent Banner</li>
+                    <li><i class="fas fa-check-circle"></i>Multi-Region Legal Templates (GDPR, CCPA)</li>
+                    <li><i class="fas fa-check-circle"></i>Manual Key Page Compliance Review</li>
+                    <li><i class="fas fa-check-circle"></i>In-Depth SEO Health Report</li>
+                    <li><i class="fas fa-check-circle"></i>14-Day Priority Support</li>
+                    <li class="key-feature"><i class="fas fa-star"></i>Results: Enhanced Search Rankings</li>
+                </ul>
+
+                <a href="javascript:void(0)" class="cta-button open-modal-btn" data-package="Advanced Compliance & SEO Suite ($449)">Upgrade to Advanced</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="card-header">
+                    <h2>The Ultimate Privacy & Store Upgrade</h2>
+                    <span class="tag">Permanent Foundation</span>
+                </div>
+                <div class="price">Custom</div>
+                <div class="price-note">Starts at $999+ (Custom Quote)</div>
+                <p class="card-description">The permanent, high-performance solution. We replace your old theme and hard-code our system for flawless long-term success.</p>
+
+                <ul class="features-list">
+                    <li class="key-feature"><i class="fas fa-crown"></i>All Features in Advanced, plus:</li>
+                    <li><i class="fas fa-check-circle"></i>Full Premium Theme Integration</li>
+                    <li><i class="fas fa-check-circle"></i>Manual Hard-Coding Integration</li>
+                    <li><i class="fas fa-check-circle"></i>Lifetime Compatibility Assurance</li>
+                    <li><i class="fas fa-check-circle"></i>Advanced Load Speed Optimization</li>
+                    <li><i class="fas fa-check-circle"></i>Dedicated Compliance Manager</li>
+                    <li class="key-feature"><i class="fas fa-star"></i>Results: Permanent Protection & Speed</li>
+                </ul>
+
+                <a href="javascript:void(0)" class="cta-button secondary open-modal-btn" data-package="Ultimate Privacy & Store Upgrade (Quote)">Request a Quote</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="how-it-works">
+        <div class="section-header">
+            <span class="tagline">Our Process</span>
+            <h2>Two Paths to Full Store Health</h2>
+        </div>
+        <div class="steps-container">
+
+            <div class="step-path">
+                <h3>The First Path: Automated Toolkit</h3>
+                <p style="margin-bottom: 20px;">Ideal for stores needing fast, effective compliance and a quick fix for visibility errors.</p>
+                <ol>
+                    <li><strong>Install Security Layer:</strong> A script is immediately installed to block all illegal tracking.</li>
+                    <li><strong>Automate Technical Fixes:</strong> Our toolkit automatically corrects errors in your <strong>HTML tags</strong> and <strong>XML Sitemapping</strong>.</li>
+                    <li><strong>Verify & Activate:</strong> A quick scan verifies that no data is leaking, and protection is fully active.</li>
+                </ol>
+            </div>
+
+            <div class="step-path" style="background: var(--bg-white); border-color: var(--primary-color);">
+                <h3 style="color: var(--dark-color);">The Second Path: Ultimate Upgrade</h3>
+                <p style="margin-bottom: 20px;">The reason for many technical issues is a compromised theme. This path is a permanent solution.</p>
+                <ol>
+                    <li><strong>Premium Theme Replacement:</strong> Your old, compromised theme is replaced with a new, stable <strong>Premium Theme</strong>.</li>
+                    <li><strong>Manual Hard-Coding:</strong> Our full compliance system is <strong>manually hard-coded</strong> directly into the new theme.</li>
+                    <li><strong>Permanent Protection:</strong> Ensures your store stays protected and runs flawlessly through all future updates.</li>
+                </ol>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="section-header">
+            <span class="tagline">Social Proof</span>
+            <h2>Trusted by Store Owners Like You</h2>
+            <p>Don't just take our word for it. See how we've helped other e-commerce businesses regain control and grow.</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="quote">"My ad analytics were a mess. I was tracking users without consent and my conversion data was completely wrong. The Advanced Suite fixed everything in 3 days. My data is finally accurate!"</p>
+                <span class="author">Jane D.</span><br>
+                <span class="title">Shopify Store Owner</span>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="quote">"I was worried about GDPR fines. The Essential Toolkit was a no-brainer. It was installed in one day and gave me total peace of mind. A must-have for any store owner."</p>
+                <span class="author">Mark S.</span><br>
+                <span class="title">E-commerce Entrepreneur</span>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="quote">"I went for the Ultimate Upgrade. My old theme was slow and broken. The team migrated me to a new premium theme and hard-coded the compliance. My store is 2x faster and 100% compliant."</p>
+                <span class="author">Alex T.</span><br>
+                <span class="title">7-Figure Store Owner</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="section-header">
+            <span class="tagline">Got Questions?</span>
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">Is this a one-time fee or a subscription?</div>
+                <div class="faq-answer">
+                    <p>All of our packages are a **one-time fee**. We believe in providing a permanent solution, not a recurring monthly bill. You pay once and the protection is yours.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Will this slow down my store?</div>
+                <div class="faq-answer">
+                    <p>No. In fact, our 'Ultimate Upgrade' package is specifically designed to **increase your store's speed**. By replacing compromised code and optimizing your theme, we improve your Core Web Vitals and overall performance. The 'Essential' toolkit runs asynchronously and is optimized for minimal impact.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Why do I need this? My store seems fine.</div>
+                <div class="faq-answer">
+                    <p>Most stores "seem fine" while silently violating laws like GDPR and CCPA by tracking customer data without consent. This leads to fines, ad account suspensions, and inaccurate analytics. Our toolkit fixes these invisible (but very expensive) problems and turns your store into a trustworthy business.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How long does the 'Ultimate Upgrade' take?</div>
+                <div class="faq-answer">
+                    <p>Implementation for the Ultimate Upgrade typically takes **1-2 weeks**. This includes consultation, premium theme selection, manual hard-coding, speed optimization, and rigorous testing before we go live. Protection starts immediately upon project commencement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4 style="color: var(--primary-color);">ConsentGuard Pro</h4>
+                <p>Comprehensive cookie consent and store health solutions for e-commerce.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#pricing">Pricing Plans</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column contact-info">
+                <h4>Contact Us</h4>
+                <p>Email: <a href="mailto:info.shopifypolicies@gmail.com">info.shopifypolicies@gmail.com</a></p>
+                <p>Phone: +1 (555) 123-4567</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 ConsentGuard Pro. All rights reserved.
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="contact-modal">
+        <div class="modal-content">
+            <span class="modal-close" id="modal-close-btn">&times;</span>
+            <h3>Get Started</h3>
+            <p>You've selected a package. Please fill out your details below to begin.</p>
+            
+            <form action="https://formsubmit.co/info.shopifypolicies@gmail.com" method="POST">
+                
+                <input type="hidden" id="package-input" name="package" value="General Inquiry">
+                
+                <input type="hidden" name="_next" value="YOUR_SITE_URL/thank-you.html"> <input type="hidden" name="_subject" id="subject-input" value="New Inquiry from ConsentGuard Pro!">
+                
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="store_url">Your Store URL</label>
+                    <input type="text" id="store_url" name="store_url" required placeholder="https://my-store.myshopify.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message (Optional)</label>
+                    <textarea id="message" name="message" placeholder="Tell us about any specific issues..."></textarea>
+                </div>
+                <button type="submit" class="modal-cta">Submit Inquiry</button>
+            </form>
+            
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- FAQ Accordion Logic ---
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Check if the item is already active
+                    const isActive = item.classList.contains('active');
+                    
+                    // Optional: Close all other active items
+                    faqItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Toggle the current item
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+            // --- Modal Form Logic ---
+            const modalOverlay = document.getElementById('contact-modal');
+            const openModalBtns = document.querySelectorAll('.open-modal-btn');
+            const closeModalBtn = document.getElementById('modal-close-btn');
+            
+            const packageInput = document.getElementById('package-input');
+            const subjectInput = document.getElementById('subject-input');
+
+            // Function to open the modal
+            const openModal = (e) => {
+                e.preventDefault(); // Stop link from navigating
+                
+                // Get package data from the button that was clicked
+                const packageName = e.currentTarget.getAttribute('data-package');
+                
+                // Set the hidden input fields in the form
+                packageInput.value = packageName;
+                subjectInput.value = `New Inquiry for: ${packageName}`;
+                
+                // Show the modal
+                modalOverlay.classList.add('active');
+            };
+
+            // Function to close the modal
+            const closeModal = () => {
+                modalOverlay.classList.remove('active');
+            };
+
+            // Add event listeners
+            openModalBtns.forEach(btn => {
+                btn.addEventListener('click', openModal);
+            });
+            
+            closeModalBtn.addEventListener('click', closeModal);
+            
+            // Also close modal if user clicks on the dark overlay
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
 
         .header h1 {
             color: #212529;
