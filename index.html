@@ -36,11 +36,24 @@
             background-color: var(--bg-light);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         a {
             text-decoration: none;
             color: var(--primary-color);
+        }
+
+        /* --- [ANIMATION] Premium Scroll Fade-in --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* --- [SECTION] GLOBAL STYLING --- */
@@ -86,12 +99,20 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            width: 100%;
         }
 
         .navbar .logo {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-color);
+            /* Example: Replace with <img src="logo.svg" alt="ConsentGuard Pro" class="logo-svg"> */
+            /* .logo-svg { height: 30px; } */
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
         }
 
         .navbar-links a {
@@ -118,6 +139,17 @@
             background: #3a36db;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* --- [MOBILE NAV] The "Responsive" Fix --- */
+        .mobile-menu-toggle {
+            display: none; /* Hidden on desktop */
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1002;
         }
 
         /* --- [HERO] MAIN HEADER --- */
@@ -638,11 +670,67 @@
         /* --- [RESPONSIVE] STYLES --- */
         @media (max-width: 992px) {
             .navbar {
-                padding: 15px 20px;
+                padding: 15px 25px;
+            }
+            
+            /* Show hamburger, hide desktop links */
+            .mobile-menu-toggle {
+                display: block;
             }
             .navbar-links {
-                display: none; /* Simple toggle for mobile */
+                display: none; /* Hide desktop links */
             }
+            
+            /* --- Mobile Nav Panel --- */
+            .mobile-nav {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                top: 0;
+                right: -100%; /* Start off-screen */
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--bg-white);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Smooth slide */
+                z-index: 1001;
+            }
+            
+            .mobile-nav.active {
+                right: 0; /* Slide in */
+            }
+            
+            .mobile-nav a {
+                font-size: 1.25rem;
+                color: var(--dark-color);
+                margin: 20px 0;
+                font-weight: 600;
+            }
+            
+            .mobile-nav .nav-cta {
+                margin-top: 20px;
+            }
+            
+            /* Dark overlay for when menu is open */
+            .body-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.4);
+                z-index: 1000;
+            }
+            .body-overlay.active {
+                display: block;
+            }
+            /* --- End Mobile Nav Panel --- */
+
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -688,6 +776,7 @@
 
     <nav class="navbar">
         <div class="logo">ConsentGuard Pro</div>
+        
         <div class="navbar-links">
             <a href="#pricing">Pricing</a>
             <a href="#how-it-works">How It Works</a>
@@ -695,18 +784,32 @@
             <a href="#faq">FAQ</a>
             <a href="javascript:void(0)" class="nav-cta open-modal-btn" data-package="General Inquiry">Get Started</a>
         </div>
+        
+        <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Open navigation menu">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
+    
+    <div class="mobile-nav" id="mobile-nav-panel">
+        <a href="#pricing">Pricing</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="javascript:void(0)" class="nav-cta open-modal-btn" data-package="General Inquiry">Get Started</a>
+    </div>
+    
+    <div class="body-overlay" id="body-overlay"></div>
 
     <header class="hero">
-        <h1>Your Store is Leaking Data. <span>We Fix It.</span></h1>
-        <p>Stop violating privacy laws, fix critical visibility errors, and turn your store into a trustworthy, high-performing business.</p>
-        <a href="javascript:void(0)" class="cta-button open-modal-btn" data-package="General Inquiry">
+        <h1 class="fade-in">Your Store is Leaking Data. <span>We Fix It.</span></h1>
+        <p class="fade-in">Stop violating privacy laws, fix critical visibility errors, and turn your store into a trustworthy, high-performing business.</p>
+        <a href="javascript:void(0)" class="cta-button open-modal-btn fade-in" data-package="General Inquiry">
             Get Your Free Compliance Audit <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
         </a>
     </header>
 
     <section id="pricing">
-        <div class="section-header">
+        <div class="section-header fade-in">
             <span class="tagline">Pricing Plans</span>
             <h2>Choose Your Compliance Foundation</h2>
             <p>One-time fees for permanent solutions. No subscriptions, no hidden costs. Just complete peace of mind.</p>
@@ -714,7 +817,7 @@
         
         <div class="pricing-container">
 
-            <div class="pricing-card">
+            <div class="pricing-card fade-in">
                 <div class="card-header">
                     <h2>Essential Compliance Toolkit</h2>
                     <span class="tag">Automated Path</span>
@@ -736,7 +839,7 @@
                 <a href="javascript:void(0)" class="cta-button secondary open-modal-btn" data-package="Essential Compliance Toolkit ($199)">Get Started</a>
             </div>
 
-            <div class="pricing-card highlight">
+            <div class="pricing-card highlight fade-in">
                 <div class="highlight-ribbon">Best Value</div>
                 <div class="card-header">
                     <h2>Advanced Compliance & SEO Suite</h2>
@@ -759,7 +862,7 @@
                 <a href="javascript:void(0)" class="cta-button open-modal-btn" data-package="Advanced Compliance & SEO Suite ($449)">Upgrade to Advanced</a>
             </div>
 
-            <div class="pricing-card">
+            <div class="pricing-card fade-in">
                 <div class="card-header">
                     <h2>The Ultimate Privacy & Store Upgrade</h2>
                     <span class="tag">Permanent Foundation</span>
@@ -785,13 +888,13 @@
     </section>
 
     <section id="how-it-works">
-        <div class="section-header">
+        <div class="section-header fade-in">
             <span class="tagline">Our Process</span>
             <h2>Two Paths to Full Store Health</h2>
         </div>
         <div class="steps-container">
 
-            <div class="step-path">
+            <div class="step-path fade-in">
                 <h3>The First Path: Automated Toolkit</h3>
                 <p style="margin-bottom: 20px;">Ideal for stores needing fast, effective compliance and a quick fix for visibility errors.</p>
                 <ol>
@@ -801,7 +904,7 @@
                 </ol>
             </div>
 
-            <div class="step-path" style="background: var(--bg-white); border-color: var(--primary-color);">
+            <div class="step-path fade-in" style="background: var(--bg-white); border-color: var(--primary-color);">
                 <h3 style="color: var(--dark-color);">The Second Path: Ultimate Upgrade</h3>
                 <p style="margin-bottom: 20px;">The reason for many technical issues is a compromised theme. This path is a permanent solution.</p>
                 <ol>
@@ -815,13 +918,13 @@
     </section>
 
     <section id="testimonials">
-        <div class="section-header">
+        <div class="section-header fade-in">
             <span class="tagline">Social Proof</span>
             <h2>Trusted by Store Owners Like You</h2>
             <p>Don't just take our word for it. See how we've helped other e-commerce businesses regain control and grow.</p>
         </div>
         <div class="testimonial-grid">
-            <div class="testimonial-card">
+            <div class="testimonial-card fade-in">
                 <div class="stars">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
@@ -829,7 +932,7 @@
                 <span class="author">Jane D.</span><br>
                 <span class="title">Shopify Store Owner</span>
             </div>
-            <div class="testimonial-card">
+            <div class="testimonial-card fade-in">
                 <div class="stars">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
@@ -837,7 +940,7 @@
                 <span class="author">Mark S.</span><br>
                 <span class="title">E-commerce Entrepreneur</span>
             </div>
-            <div class="testimonial-card">
+            <div class="testimonial-card fade-in">
                 <div class="stars">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
@@ -849,11 +952,11 @@
     </section>
 
     <section id="faq">
-        <div class="section-header">
+        <div class="section-header fade-in">
             <span class="tagline">Got Questions?</span>
             <h2>Frequently Asked Questions</h2>
         </div>
-        <div class="faq-container">
+        <div class="faq-container fade-in">
             <div class="faq-item">
                 <div class="faq-question">Is this a one-time fee or a subscription?</div>
                 <div class="faq-answer">
@@ -925,7 +1028,9 @@
                 
                 <input type="hidden" id="package-input" name="package" value="General Inquiry">
                 
-                <input type="hidden" name="_next" value="YOUR_SITE_URL/thank-you.html"> <input type="hidden" name="_subject" id="subject-input" value="New Inquiry from ConsentGuard Pro!">
+                <input type="hidden" name="_next" value="https://YOUR-LIVE-WEBSITE-URL/thank-you.html">
+                
+                <input type="hidden" name="_subject" id="subject-input" value="New Inquiry from ConsentGuard Pro!">
                 
                 <div class="form-group">
                     <label for="name">Your Name</label>
@@ -949,19 +1054,49 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
+            // --- Mobile Menu Logic ---
+            const menuToggleBtn = document.getElementById('mobile-menu-btn');
+            const mobileNavPanel = document.getElementById('mobile-nav-panel');
+            const bodyOverlay = document.getElementById('body-overlay');
+            const navLinks = mobileNavPanel.querySelectorAll('a');
+
+            const closeMenu = () => {
+                mobileNavPanel.classList.remove('active');
+                bodyOverlay.classList.remove('active');
+                menuToggleBtn.innerHTML = '<i class="fas fa-bars"></i>'; // Change icon to bars
+            };
+
+            const openMenu = () => {
+                mobileNavPanel.classList.add('active');
+                bodyOverlay.classList.add('active');
+                menuToggleBtn.innerHTML = '<i class="fas fa-times"></i>'; // Change icon to X
+            };
+
+            menuToggleBtn.addEventListener('click', () => {
+                if (mobileNavPanel.classList.contains('active')) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+
+            // Close menu when overlay or a link is clicked
+            bodyOverlay.addEventListener('click', closeMenu);
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    closeMenu();
+                    // If it's the modal button, it will be handled by the modal logic below
+                });
+            });
+
+
             // --- FAQ Accordion Logic ---
             const faqItems = document.querySelectorAll('.faq-item');
-            
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
                 question.addEventListener('click', () => {
-                    // Check if the item is already active
                     const isActive = item.classList.contains('active');
-                    
-                    // Optional: Close all other active items
                     faqItems.forEach(i => i.classList.remove('active'));
-                    
-                    // Toggle the current item
                     if (!isActive) {
                         item.classList.add('active');
                     }
@@ -976,318 +1111,46 @@
             const packageInput = document.getElementById('package-input');
             const subjectInput = document.getElementById('subject-input');
 
-            // Function to open the modal
             const openModal = (e) => {
-                e.preventDefault(); // Stop link from navigating
-                
-                // Get package data from the button that was clicked
+                e.preventDefault(); 
                 const packageName = e.currentTarget.getAttribute('data-package');
-                
-                // Set the hidden input fields in the form
                 packageInput.value = packageName;
                 subjectInput.value = `New Inquiry for: ${packageName}`;
-                
-                // Show the modal
                 modalOverlay.classList.add('active');
             };
 
-            // Function to close the modal
-            const closeModal = () => {
+            const closeModalFunc = () => {
                 modalOverlay.classList.remove('active');
             };
 
-            // Add event listeners
             openModalBtns.forEach(btn => {
                 btn.addEventListener('click', openModal);
             });
             
-            closeModalBtn.addEventListener('click', closeModal);
-            
-            // Also close modal if user clicks on the dark overlay
+            closeModalBtn.addEventListener('click', closeModalFunc);
+            bodyOverlay.addEventListener('click', closeModalFunc); // Also close modal on overlay click
             modalOverlay.addEventListener('click', (e) => {
                 if (e.target === modalOverlay) {
-                    closeModal();
+                    closeModalFunc();
                 }
             });
+
+            // --- Scroll Animation Logic ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            // Observe all elements with the .fade-in class
+            const elementsToFade = document.querySelectorAll('.fade-in');
+            elementsToFade.forEach(el => observer.observe(el));
 
         });
     </script>
 </body>
 </html>
-
-        .header h1 {
-            color: #212529;
-            font-weight: 700;
-            margin-bottom: 10px;
-            font-size: 2.5rem;
-        }
-
-        .header p {
-            font-size: 1.25rem;
-            color: #6c757d;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Pricing Container */
-        .pricing-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Pricing Card */
-        .pricing-card {
-            background: var(--card-background);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            padding: 30px;
-            width: 100%;
-            max-width: 350px;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .pricing-card.highlight {
-            border-color: var(--primary-color);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transform: translateY(-5px);
-        }
-
-        /* Card Header */
-        .card-header h2 {
-            font-size: 1.75rem;
-            color: #343a40;
-            margin-bottom: 10px;
-        }
-
-        .tag {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .highlight .tag {
-            background-color: var(--accent-color);
-        }
-
-        /* Price Display */
-        .price {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #212529;
-            margin-bottom: 5px;
-            line-height: 1;
-        }
-
-        .price-note {
-            color: #6c757d;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        .card-description {
-            font-size: 1rem;
-            color: #6c757d;
-            margin-bottom: 30px;
-            min-height: 60px; /* Ensure visual balance */
-        }
-        
-        /* Feature List */
-        .features-list {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 30px;
-            flex-grow: 1; /* Pushes the button to the bottom */
-        }
-
-        .features-list li {
-            padding: 10px 0;
-            border-bottom: 1px dashed var(--border-color);
-            color: var(--text-color);
-            font-size: 1rem;
-        }
-
-        .features-list li:last-child {
-            border-bottom: none;
-        }
-
-        .features-list .key-feature {
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .features-list .key-feature span {
-            color: var(--accent-color);
-            font-size: 1.1rem;
-        }
-
-        /* Call-to-Action Button */
-        .cta-button {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin-top: auto; /* Aligns button to the bottom */
-            border: none;
-            border-radius: 8px;
-            background-color: var(--primary-color);
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.1s;
-        }
-
-        .cta-button:hover {
-            background-color: #0056b3;
-            transform: translateY(-1px);
-        }
-        
-        .highlight .cta-button {
-            background-color: var(--accent-color);
-        }
-        
-        .highlight .cta-button:hover {
-            background-color: #1e7e34;
-        }
-
-        .custom-quote-link {
-            background-color: #6c757d;
-        }
-
-        .custom-quote-link:hover {
-            background-color: #5a6268;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .pricing-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .pricing-card {
-                max-width: 500px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-            .header p {
-                font-size: 1rem;
-            }
-            .pricing-card {
-                padding: 20px;
-            }
-            .price {
-                font-size: 2.5rem;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <h1>ConsentGuard Pro: Choose Your Compliance Foundation</h1>
-        <p>Protect your store from privacy fines, recover valuable data, and build customer trust with our comprehensive toolkit solutions.</p>
-    </div>
-
-    <div class="pricing-container">
-
-        <div class="pricing-card">
-            <div class="card-header">
-                <h2>Essential Compliance Toolkit</h2>
-                <div class="tag">Automated Protection</div>
-            </div>
-            <div class="price">$199</div>
-            <div class="price-note">Initial Investment (One-Time Fee)</div>
-            <p class="card-description">The essential, automated solution to immediately stop illegal customer tracking and avoid compliance fines. Protection starts right away.</p>
-            
-            <ul class="features-list">
-                <li class="key-feature"><span>✅</span> Dedicated Security Layer (Block all tracking until consent)</li>
-                <li>Legal Consent Gate Implementation</li>
-                <li>Automated XML Sitemap Fix</li>
-                <li>Automated HTML Tag Correction</li>
-                <li>Compliance Verification Scan</li>
-                <li>7-Day Post-Issuance Support</li>
-                <li class="key-feature">What You Get: <span>Legal Compliance (No Fines)</span>, Recovered Analytics, Customer Trust</li>
-            </ul>
-
-            <a href="#contact" class="cta-button">Get Essential Protection</a>
-        </div>
-
-        <div class="pricing-card highlight">
-            <div class="card-header">
-                <h2>Advanced Compliance & SEO Suite</h2>
-                <div class="tag">Recommended</div>
-            </div>
-            <div class="price">$449</div>
-            <div class="price-note">Initial Investment (One-Time Fee)</div>
-            <p class="card-description">Builds on the Essential Toolkit with deeper optimization, better user experience, and a manual review for a robust foundation.</p>
-
-            <ul class="features-list">
-                <li class="key-feature"><span>✅</span> All Features in Essential, plus:</li>
-                <li class="key-feature">Customizable Consent Banner (Optimized for High Opt-In)</li>
-                <li>Multi-Region Legal Templates (GDPR, CCPA, etc.)</li>
-                <li class="key-feature">Manual Key Page Compliance Review</li>
-                <li>In-Depth SEO Health Report</li>
-                <li>1-Week Implementation Time</li>
-                <li>14-Day Priority Support Window</li>
-                <li class="key-feature">What You Get: <span>Enhanced Search Rankings</span>, Accurate Data, Optimized UX</li>
-            </ul>
-
-            <a href="#contact" class="cta-button">Upgrade to Advanced</a>
-        </div>
-
-        <div class="pricing-card">
-            <div class="card-header">
-                <h2>The Ultimate Privacy & Store Upgrade</h2>
-                <div class="tag">Permanent Solution</div>
-            </div>
-            <div class="price">$999+</div>
-            <div class="price-note">Contact for Custom Quote</div>
-            <p class="card-description">The most robust, permanent solution. We hard-code our system into a new Premium Theme for flawless long-term performance.</p>
-
-            <ul class="features-list">
-                <li class="key-feature"><span>✅</span> All Features in Advanced, plus:</li>
-                <li class="key-feature">Full Premium Theme Integration (License Included)</li>
-                <li class="key-feature">Manual Hard-Coding Integration (Cleanest Codebase)</li>
-                <li>Lifetime Compatibility Assurance (Through platform updates)</li>
-                <li>Advanced Load Speed Optimization</li>
-                <li>Dedicated Compliance Manager</li>
-                <li>30-Days Post-Launch Monitoring</li>
-                <li class="key-feature">What You Get: <span>Permanent Protection</span>, Maximum Store Speed, Long-Term Success</li>
-            </ul>
-
-            <a href="#contact" class="cta-button custom-quote-link">Start My Ultimate Upgrade</a>
-        </div>
-
-    </div>
-
-    <div id="contact" style="height: 100px; text-align: center; padding-top: 50px;">
-        <p style="color: #6c757d;">(Links above should connect to your contact form or checkout page.)</p>
-    </div>
-
-</body>
-</html>
-
